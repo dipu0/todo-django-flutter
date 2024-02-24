@@ -16,6 +16,12 @@ This repository serves as an umbrella for two submodules: a Django backend and a
 - Clean architecture with BLoC pattern for state management in Flutter.
 - Django ORM for database interactions.
 
+## Icons
+
+| Square | Rounded | Circle |
+|------------|----------------|----------------------------|
+| ![square](icon\todo_icon_square.png) | ![rounded](icon\todo_icon_rounded.png) | ![circle](icon\todo_icon_circle.png) |
+
 ## Screenshots
 
 | Login Page | Task Dashboard | Task Deletion Confirmation |
