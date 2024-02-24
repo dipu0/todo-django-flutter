@@ -20,7 +20,7 @@ This repository serves as an umbrella for two submodules: a Django backend and a
 
 | Square | Rounded | Circle |
 |------------|----------------|----------------------------|
-| ![square](icon\todo_icon_square.png) | ![rounded](icon\todo_icon_rounded.png) | ![circle](icon\todo_icon_circle.png) |
+| ![square](icon/todo_icon_square.png) | ![rounded](icon/todo_icon_rounded.png) | ![circle](icon/todo_icon_circle.png) |
 
 ## Screenshots
 
