@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="This is a to-do list implemented using Django by Dennis Ivy, a full-stack web developer.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>To-Do Items</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #EDE7F6; /* Soft purple background */
+            font-family: 'Poppins', sans-serif;
+            padding-top: 50px;
+            margin: 50;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-bar {
+            background: #9575CD; /* Medium purple */
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        input[type=text], input[type=password], textarea, .button {
+            padding: 12px 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input[type=text]:focus, input[type=password]:focus, textarea:focus {
+            border-color: #7E57C2; /* Darker purple */
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1) inset, 0 0 8px rgba(126, 87, 194, 0.6);
+            outline: 0;
+        }
+
+        .button {
+            background-color: #7E57C2; /* Darker purple */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .button:hover {
+            background-color: #673AB7; /* Even darker purple */
+        }
+
+        a, p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        a {
+            text-decoration: none;
+            color: #7E57C2; /* Purple link */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 85%;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        {% block content %} {% endblock content %}
+    </div>
+
+</body>
+
+</html>

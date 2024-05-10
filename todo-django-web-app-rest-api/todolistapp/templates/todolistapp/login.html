@@ -1,0 +1,77 @@
+{% extends 'todolistapp/main.html' %}
+{% block content %}
+
+<style>
+    body, html {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #F3E8FF; /* Light purple background */
+    }
+
+    .card-body {
+        width: 100%;
+        max-width: 400px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .card-body form {
+        margin: 20px 0;
+    }
+
+    input[type="text"], input[type="password"], input[type="submit"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #DDD;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .button {
+        background-color: #7A3EB1; /* Dark purple */
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        padding: 10px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .button:hover {
+        background-color: #9B5DE5; /* Lighter purple */
+    }
+
+    a {
+        color: #7A3EB1;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h1 {
+        color: #5A189A; /* Deep purple */
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="card-body">
+    <h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+
+{% endblock content %}

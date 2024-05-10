@@ -1,0 +1,181 @@
+{% extends 'todolistapp/main.html' %}
+{% block content %}
+
+<style>
+    body, h1, h2, h3, input, button, a {
+        margin: 0;
+        margin-top: 50px;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .header-bar {
+        display: flex;
+        justify-content: space-between;
+        background: linear-gradient(135deg, #6D5BBA 0%, #8D58BF 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 2px 5px rgba(107, 103, 103, 0.2);
+    }
+
+    #search-add-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .search-group {
+        display: flex;
+        flex-grow: 1; 
+        margin-right: 10px; 
+    }
+
+    input[type='text'] {
+        flex-grow: 1;
+        margin-right: 10px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    
+
+    .button, #add-link {
+        background-color: #6D5BBA;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .button:hover, #add-link:hover {
+        background-color: #8D58BF;
+    }
+
+    .task-items-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .task-wrapper {
+        background: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .task-wrapper:hover {
+        transform: translateY(-5px);
+    }
+
+    .task-title a, .task-title i {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .delete-link {
+        color: #e53935;
+        cursor: pointer;
+        font-size: 24px; /* Larger delete icon */
+        margin-left: 10px;
+    }
+
+    .handle {
+        cursor: grab;
+        color: #9E9E9E;
+        margin-left: 10px;
+    }
+
+</style>
+
+<div class="header-bar">
+    <div>
+        <h1>Hello, {{ request.user|title }}</h1>
+        <h3>You have <i>{{ count }}</i> incomplete task{{ count|pluralize:"s" }}</h3>
+    </div>
+    {% if request.user.is_authenticated %}
+<<<<<<< HEAD
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background:none!important; border:none; padding:0!important; font: inherit; color:#069; cursor:pointer;">Logout</button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+   
+    
+</div>
+
+
+<div id="search-add-wrapper">
+    <form method="GET" style="display: flex;">
+        <input type='text' name='search-area' placeholder="Search your task" value="{{search_input}}">
+        <input class="button" type="submit" value='Search'>
+=======
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="button">Logout</button>
+>>>>>>> feature/api
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}" class="button">Login</a>
+    {% endif %}
+</div>
+
+<div id="search-add-wrapper">
+    <form method="GET">
+        <input type='text' name='search-area' placeholder="Search your task" value="{{ search_input }}">
+        <input class="button" type="submit" value='Search'>
+    </form>
+    <a id="add-link" href="{% url 'task-create' %}">&#x2b; Add Task</a>
+</div>
+
+<div id="tasklist" class="task-items-wrapper">
+    {% for task in tasks %}
+    <div class="task-wrapper" data-position="{{ task.pk }}">
+        <div class="task-title">
+            {% if task.complete %}
+            <i><s><a href="{% url 'task-update' task.id %}">{{ task }}</a></s></i>
+            {% else %}
+            <a href="{% url 'task-update' task.id %}">{{ task }}</a>
+            {% endif %}
+        </div>
+        <div class="task-controls">
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            <span class="handle">&#10247;</span>
+        </div>
+    </div>
+    {% empty %}
+    <div style="grid-column: 1/-1; text-align: center;">
+        <h3>No new tasks are created.</h3>
+        <h3>Create a <a href="{% url 'task-create' %}" class="button">New task</a>!</h3>
+    </div>
+    {% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+    new Sortable(document.getElementById("tasklist"), {
+        handle: '.handle',
+        animation: 150,
+        store: {
+            set: function (sortable) {
+                var order = sortable.toArray();
+                localStorage.setItem(sortable.options.group.name, order.join('|'));
+            },
+            get: function (sortable) {
+                var order = localStorage.getItem(sortable.options.group.name);
+                return order ? order.split('|') : [];
+            }
+        }
+    });
+</script>
+
+{% endblock content %}
